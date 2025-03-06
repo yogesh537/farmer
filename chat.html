@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Assistant AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="ai-chat-box">
+            <img src="ai.png" alt="" id="aiImage" width="10%">
+            <div class="ai-chat-area">
+                Hello! I'm your AI Farming Assistant. I can help you with:
+                <ul>
+                    <li>Crop disease identification</li>
+                    <li>Farming best practices</li>
+                    <li>Weather-based recommendations</li>
+                    <li>Treatment suggestions</li>
+                    <li>General farming advice</li>
+                </ul>
+                Please describe your query or upload a crop image for analysis.
+            </div>
+        </div>
+    </div>
+    <div class="prompt-area">
+        <input type="text" id="prompt" placeholder="Ask about your crops or farming practices...">
+        <button id="image" title="Upload crop image"><img src="img.svg" alt="">
+            <input type="file" accept="images/*" hidden></button>
+        <button id="submit"><img src="submit.svg" alt=""></button>
+    </div>
+    <script src="script.js"></script>  
+</body>
+</html>

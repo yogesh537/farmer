@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Business Ideas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e4d92, #2ecc71);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #2ecc71;
+            font-size: 2.5rem;
+        }
+
+        .back-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .farmer-info {
+            background: rgba(46, 204, 113, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .farmer-info h2 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-item {
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item h3 {
+            color: #2ecc71;
+            margin-bottom: 0.5rem;
+        }
+
+        .business-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #2ecc71;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .category-btn:hover {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .category-btn.active {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .business-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .business-card h3 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .business-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .business-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .investment-badge {
+            background: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .profit-badge {
+            background: rgba(241, 196, 15, 0.1);
+            color: #f39c12;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-section h3 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-section h3:before {
+            content: "💡";
+        }
+
+        .modal-section ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .modal-section li {
+            margin: 0.5rem 0;
+            position: relative;
+        }
+
+        .modal-section li:before {
+            content: "•";
+            color: #2ecc71;
+            position: absolute;
+            left: -1.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading img {
+            width: 50px;
+        }
+
+        .loan-scheme {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .loan-scheme h4 {
+            color: #2ecc71;
+            margin-bottom: 0.5rem;
+        }
+
+        .loan-scheme ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .loan-scheme li {
+            margin: 0.3rem 0;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-message p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: #2ecc71;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .climate-recommendations {
+            background: rgba(46, 204, 113, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .climate-recommendations h2 {
+            color: #2ecc71;
+            margin-bottom: 1.5rem;
+        }
+
+        .month-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .month-section h3 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+        }
+
+        .prevention-card {
+            background: rgba(46, 204, 113, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .prevention-card h4 {
+            color: #2ecc71;
+            margin-bottom: 0.5rem;
+        }
+
+        .prevention-card h5 {
+            color: #27ae60;
+            margin: 0.5rem 0;
+        }
+
+        .prevention-card ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .prevention-card li {
+            margin: 0.3rem 0;
+            position: relative;
+        }
+
+        .prevention-card li:before {
+            content: "•";
+            color: #2ecc71;
+            position: absolute;
+            left: -1.5rem;
+        }
+
+        .timing {
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .general-advice {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .general-advice h3 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+        }
+
+        .general-advice ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .general-advice li {
+            margin: 0.5rem 0;
+            position: relative;
+        }
+
+        .general-advice li:before {
+            content: "🌱";
+            position: absolute;
+            left: -1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Side Business Ideas</h1>
+            <a href="main.html" class="back-btn">
+                <img src="farm-logo.svg" alt="Farm Logo" width="24" height="24">
+                <img src="back.svg" alt="Back" width="20">
+                Back to Hub
+            </a>
+        </div>
+
+        <div class="farmer-info">
+            <h2>Your Farm Profile</h2>
+            <div class="info-grid" id="farmerProfile">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="business-categories">
+            <button class="category-btn active" data-category="all">All Ideas</button>
+            <button class="category-btn" data-category="value-added">Value Added Products</button>
+            <button class="category-btn" data-category="processing">Processing Units</button>
+            <button class="category-btn" data-category="services">Farm Services</button>
+            <button class="category-btn" data-category="tourism">Agri-Tourism</button>
+        </div>
+
+        <div class="business-grid" id="businessGrid">
+            <!-- Business cards will be populated here -->
+        </div>
+
+        <div class="modal" id="businessModal">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+                <div id="modalContent">
+                    <div class="loading">
+                        <img src="loading.webp" alt="Loading">
+                        <p>Loading business details...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const Api_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyBo3T4eKrSp6uFIUE8UPWHxwP0qA_6iZZg";
+        const Weather_Api_Url = "https://api.openweathermap.org/data/2.5/weather?q=";
+        const Weather_Api_Key = "eb683ea6ae218de929885cb9350e4eee"; // You'll need to replace this with your actual API key
+
+        // Function to check if data is expired (5 months)
+        function isDataExpired(timestamp) {
+            const fiveMonthsInMs = 5 * 30 * 24 * 60 * 60 * 1000; // 5 months in milliseconds
+            return Date.now() - timestamp > fiveMonthsInMs;
+        }
+
+        // Function to clear all stored data
+        function clearStoredData() {
+            localStorage.removeItem('farmerData');
+            localStorage.removeItem('climateData');
+            localStorage.removeItem('businessIdeas');
+            console.log('All stored data cleared');
+        }
+
+        // Get farmer data from localStorage with expiration check
+        function getFarmerData() {
+            const storedData = localStorage.getItem('farmerData');
+            if (!storedData) return null;
+
+            try {
+                const { data, timestamp } = JSON.parse(storedData);
+                if (isDataExpired(timestamp)) {
+                    clearStoredData();
+                    return null;
+                }
+                return data;
+            } catch (error) {
+                console.error('Error parsing stored data:', error);
+                clearStoredData();
+                return null;
+            }
+        }
+
+        const farmerData = getFarmerData();
+
+        // Function to store farmer data with timestamp
+        function storeFarmerData(data) {
+            // Clear existing data before storing new data
+            clearStoredData();
+
+            const dataToStore = {
+                data: data,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('farmerData', JSON.stringify(dataToStore));
+            console.log('New farmer data stored with timestamp:', new Date(dataToStore.timestamp).toLocaleString());
+        }
+
+        // Function to store climate data
+        function storeClimateData(data) {
+            const dataToStore = {
+                data: data,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('climateData', JSON.stringify(dataToStore));
+        }
+
+        // Function to get climate data with caching
+        async function getClimateData(location) {
+            // Check for cached climate data
+            const cachedData = localStorage.getItem('climateData');
+            if (cachedData) {
+                const { data, timestamp } = JSON.parse(cachedData);
+                // Use cached data if less than 1 hour old
+                if (Date.now() - timestamp < 60 * 60 * 1000) {
+                    return data;
+                }
+            }
+
+            try {
+                const response = await fetch(`${Weather_Api_Url}${location}&appid=${Weather_Api_Key}&units=metric`);
+                if (!response.ok) throw new Error('Weather data fetch failed');
+                const data = await response.json();
+                storeClimateData(data); // Cache the new data
+                return data;
+            } catch (error) {
+                console.error('Error fetching climate data:', error);
+                return null;
+            }
+        }
+
+        // Function to store business ideas
+        function storeBusinessIdeas(ideas) {
+            const dataToStore = {
+                data: ideas,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('businessIdeas', JSON.stringify(dataToStore));
+        }
+
+        // Function to get business ideas with expiration check
+        function getBusinessIdeas() {
+            const storedIdeas = localStorage.getItem('businessIdeas');
+            if (!storedIdeas) return null;
+
+            try {
+                const { data, timestamp } = JSON.parse(storedIdeas);
+                if (isDataExpired(timestamp)) {
+                    localStorage.removeItem('businessIdeas');
+                    return null;
+                }
+                return data;
+            } catch (error) {
+                console.error('Error parsing stored business ideas:', error);
+                localStorage.removeItem('businessIdeas');
+                return null;
+            }
+        }
+
+        // Function to analyze climate impact on crops
+        async function analyzeClimateImpact() {
+            if (!farmerData) return;
+
+            const climateData = await getClimateData(farmerData.location);
+            if (!climateData) return;
+
+            const prompt = `As an agricultural expert, analyze the following climate data and provide crop-specific prevention recommendations for the next 5 months:
+
+Current Climate Data:
+- Temperature: ${climateData.main.temp}°C
+- Humidity: ${climateData.main.humidity}%
+- Wind Speed: ${climateData.wind.speed} m/s
+- Weather: ${climateData.weather[0].main}
+
+Farmer's Crops: ${farmerData.crops.join(', ')}
+Location: ${farmerData.location}
+
+Provide recommendations in the following JSON format:
+{
+    "monthlyRecommendations": [
+        {
+            "month": "Current Month",
+            "climateConditions": ["Expected conditions"],
+            "preventions": [
+                {
+                    "crop": "Crop Name",
+                    "risks": ["Potential risks"],
+                    "preventiveMeasures": ["Specific measures to take"],
+                    "timing": "When to implement"
+                }
+            ]
+        }
+    ],
+    "generalAdvice": [
+        "General preventive measures for all crops"
+    ]
+}`;
+
+            try {
+                const response = await fetch(Api_Url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) throw new Error('API request failed');
+                const data = await response.json();
+                
+                if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const recommendations = JSON.parse(data.candidates[0].content.parts[0].text);
+                    displayClimateRecommendations(recommendations);
+                }
+            } catch (error) {
+                console.error('Error analyzing climate impact:', error);
+            }
+        }
+
+        // Function to display climate recommendations
+        function displayClimateRecommendations(recommendations) {
+            const climateSection = document.createElement('div');
+            climateSection.className = 'climate-recommendations';
+            climateSection.innerHTML = `
+                <h2>Climate Impact Analysis & Recommendations</h2>
+                <div class="monthly-recommendations">
+                    ${recommendations.monthlyRecommendations.map(month => `
+                        <div class="month-section">
+                            <h3>${month.month}</h3>
+                            <div class="climate-conditions">
+                                <h4>Expected Conditions:</h4>
+                                <ul>
+                                    ${month.climateConditions.map(condition => `<li>${condition}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="crop-preventions">
+                                ${month.preventions.map(prevention => `
+                                    <div class="prevention-card">
+                                        <h4>${prevention.crop}</h4>
+                                        <div class="risks">
+                                            <h5>Potential Risks:</h5>
+                                            <ul>
+                                                ${prevention.risks.map(risk => `<li>${risk}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                        <div class="measures">
+                                            <h5>Preventive Measures:</h5>
+                                            <ul>
+                                                ${prevention.preventiveMeasures.map(measure => `<li>${measure}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                        <p class="timing">Implementation Timing: ${prevention.timing}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="general-advice">
+                    <h3>General Preventive Measures</h3>
+                    <ul>
+                        ${recommendations.generalAdvice.map(advice => `<li>${advice}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            // Insert climate recommendations after the farmer info section
+            const farmerInfo = document.querySelector('.farmer-info');
+            farmerInfo.parentNode.insertBefore(climateSection, farmerInfo.nextSibling);
+        }
+
+        // Display farmer profile
+        function displayFarmerProfile() {
+            const profile = document.getElementById('farmerProfile');
+            if (farmerData) {
+                profile.innerHTML = `
+                    <div class="info-item">
+                        <h3>Farm Size</h3>
+                        <p>${farmerData.farmSize} acres</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Soil Type</h3>
+                        <p>${farmerData.soilType}</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Current Crops</h3>
+                        <p>${farmerData.crops.join(', ')}</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Location</h3>
+                        <p>${farmerData.location}</p>
+                    </div>
+                `;
+            } else {
+                profile.innerHTML = '<p>Please complete the registration form first.</p>';
+            }
+        }
+
+        // Generate business ideas using Gemini API
+        async function generateBusinessIdeas() {
+            if (!farmerData) {
+                document.getElementById('businessGrid').innerHTML = `
+                    <div class="error-message">
+                        <p>Please complete the registration form first to get personalized business ideas.</p>
+                        <a href="register.html" class="register-btn">Go to Registration</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Check for cached business ideas
+            const cachedIdeas = getBusinessIdeas();
+            if (cachedIdeas) {
+                displayBusinessIdeas(cachedIdeas);
+                return;
+            }
+
+            const businessGrid = document.getElementById('businessGrid');
+            businessGrid.innerHTML = `
+                <div class="loading">
+                    <img src="loading.webp" alt="Loading">
+                    <p>Generating personalized business ideas based on your farm profile...</p>
+                </div>
+            `;
+
+            const prompt = `As an agricultural business consultant, analyze the following farm profile and suggest 3 most profitable business ideas:
+
+Farm Profile:
+- Farm Size: ${farmerData.farmSize} acres
+- Soil Type: ${farmerData.soilType}
+- Current Crops: ${farmerData.crops.join(', ')}
+- Location: ${farmerData.location}
+
+Generate 3 business ideas in the following JSON array format:
+[
+    {
+        "title": "Business Name",
+        "description": "Detailed description of the business idea",
+        "investment": "Low/Medium/High",
+        "profit": "Low/Medium/High",
+        "marketAnalysis": [
+            "Target market details",
+            "Market demand analysis",
+            "Competition analysis",
+            "Growth potential"
+        ],
+        "implementation": [
+            "Step-by-step implementation plan",
+            "Timeline for setup",
+            "Required certifications",
+            "Infrastructure needs"
+        ],
+        "resources": [
+            "Equipment and machinery",
+            "Raw materials",
+            "Storage facilities",
+            "Transportation needs"
+        ],
+        "manpower": [
+            "Required skills",
+            "Number of workers",
+            "Training needs",
+            "Management structure"
+        ],
+        "riskManagement": [
+            "Potential risks",
+            "Mitigation strategies",
+            "Insurance requirements",
+            "Quality control measures"
+        ],
+        "moneyManagement": [
+            "Initial investment amount",
+            "Monthly operational costs",
+            "Expected revenue",
+            "Break-even analysis",
+            "Profit margins"
+        ],
+        "clientFinding": [
+            "Target customer segments",
+            "Marketing strategies",
+            "Sales channels",
+            "Partnership opportunities",
+            "Digital presence requirements"
+        ],
+        "loanSchemes": [
+            {
+                "name": "Scheme Name",
+                "amount": "Loan amount",
+                "interest": "Interest rate",
+                "process": "Application process",
+                "documents": "Required documents",
+                "eligibility": "Eligibility criteria",
+                "repayment": "Repayment terms"
+            }
+        ]
+    }
+]
+
+Important:
+1. Generate exactly 3 business ideas
+2. Each idea should be a complete JSON object
+3. Focus on ideas that complement the current crops
+4. Consider the soil type and location
+5. Provide realistic cost estimates in Indian Rupees (₹)
+6. Include specific loan schemes available in India
+7. Make sure the response is valid JSON
+8. Return ONLY the JSON array, no additional text`;
+
+            try {
+                console.log('Sending request to API...');
+                const response = await fetch(Api_Url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Raw API Response:', data);
+
+                if (!data.candidates || !data.candidates[0]?.content?.parts[0]?.text) {
+                    throw new Error('Invalid API response structure');
+                }
+
+                const responseText = data.candidates[0].content.parts[0].text;
+                console.log('Response Text:', responseText);
+
+                // Clean the response text to ensure it's valid JSON
+                let cleanedText = responseText.trim();
+                if (cleanedText.startsWith('```json')) {
+                    cleanedText = cleanedText.substring(7);
+                }
+                if (cleanedText.endsWith('```')) {
+                    cleanedText = cleanedText.substring(0, cleanedText.length - 3);
+                }
+                cleanedText = cleanedText.trim();
+
+                console.log('Cleaned Text:', cleanedText);
+
+                // Try to parse the JSON
+                let businessIdeas;
+                try {
+                    businessIdeas = JSON.parse(cleanedText);
+                } catch (parseError) {
+                    console.error('JSON Parse Error:', parseError);
+                    throw new Error('Failed to parse business ideas JSON');
+                }
+
+                console.log('Parsed Business Ideas:', businessIdeas);
+
+                if (!Array.isArray(businessIdeas) || businessIdeas.length === 0) {
+                    throw new Error('No business ideas generated');
+                }
+
+                // Store the generated ideas
+                storeBusinessIdeas(businessIdeas);
+                displayBusinessIdeas(businessIdeas);
+            } catch (error) {
+                console.error('Detailed Error:', error);
+                businessGrid.innerHTML = `
+                    <div class="error-message">
+                        <p>Sorry, we couldn't generate business ideas at this time.</p>
+                        <p>Error Details: ${error.message}</p>
+                        <p>Please try the following:</p>
+                        <ul style="text-align: left; margin: 1rem 0;">
+                            <li>Check your internet connection</li>
+                            <li>Refresh the page</li>
+                            <li>Make sure you've completed the registration form</li>
+                            <li>Try again in a few minutes</li>
+                        </ul>
+                        <button onclick="generateBusinessIdeas()" class="register-btn" style="margin-top: 1rem;">
+                            Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Display business ideas
+        function displayBusinessIdeas(ideas) {
+            const grid = document.getElementById('businessGrid');
+            if (!ideas || !Array.isArray(ideas) || ideas.length === 0) {
+                grid.innerHTML = `
+                    <div class="error-message">
+                        <p>No business ideas were generated. Please try again.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = ideas.map((idea, index) => `
+                <div class="business-card" onclick="showBusinessDetails(${index})">
+                    <h3>${idea.title}</h3>
+                    <p>${idea.description}</p>
+                    <div class="business-info">
+                        <span class="investment-badge">Investment: ${idea.investment}</span>
+                        <span class="profit-badge">Profit: ${idea.profit}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Store the ideas array globally
+            window.businessIdeas = ideas;
+        }
+
+        // Show business details in modal
+        function showBusinessDetails(index) {
+            const business = window.businessIdeas[index];
+            if (!business) {
+                console.error('Business idea not found');
+                return;
+            }
+
+            const modal = document.getElementById('businessModal');
+            const modalContent = document.getElementById('modalContent');
+
+            modalContent.innerHTML = `
+                <h2>${business.title}</h2>
+                <p>${business.description}</p>
+                
+                <div class="modal-section">
+                    <h3>Market Analysis</h3>
+                    <ul>
+                        ${business.marketAnalysis.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Implementation</h3>
+                    <ul>
+                        ${business.implementation.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Resources Required</h3>
+                    <ul>
+                        ${business.resources.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Manpower</h3>
+                    <ul>
+                        ${business.manpower.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Risk Management</h3>
+                    <ul>
+                        ${business.riskManagement.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Money Management</h3>
+                    <ul>
+                        ${business.moneyManagement.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Client Finding Process</h3>
+                    <ul>
+                        ${business.clientFinding.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>Available Loan Schemes</h3>
+                    ${business.loanSchemes.map(scheme => `
+                        <div class="loan-scheme">
+                            <h4>${scheme.name}</h4>
+                            <ul>
+                                <li>Loan Amount: ${scheme.amount}</li>
+                                <li>Interest Rate: ${scheme.interest}</li>
+                                <li>Application Process: ${scheme.process}</li>
+                                <li>Required Documents: ${scheme.documents}</li>
+                            </ul>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('businessModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('businessModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Add event listener for storage changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'farmerData') {
+                // Reload the page when new farmer data is stored
+                window.location.reload();
+            }
+        });
+
+        // Initialize the page
+        displayFarmerProfile();
+        generateBusinessIdeas();
+        analyzeClimateImpact();
+    </script>
+</body>
+</html> 

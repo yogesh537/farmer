@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e4d92, #2ecc71);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #2ecc71;
+            font-size: 2.5rem;
+        }
+
+        .back-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .weather-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-card h3 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .weather-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .weather-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .weather-icon {
+            font-size: 1.5rem;
+        }
+
+        .recommendations {
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .recommendations h2 {
+            color: #2ecc71;
+            margin-bottom: 1.5rem;
+        }
+
+        .crop-advice {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .crop-advice h3 {
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .advice-list {
+            list-style: none;
+        }
+
+        .advice-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .advice-list li:before {
+            content: "🌱";
+            position: absolute;
+            left: 0;
+        }
+
+        .alert {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ffeeba;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading img {
+            width: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .prediction-card {
+            background: linear-gradient(135deg, #2ecc71, #1e4d92);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .prediction-card h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .prediction-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .prediction-item h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .prediction-chart {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .confidence-level {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .confidence-high {
+            background: rgba(46, 204, 113, 0.2);
+        }
+
+        .confidence-medium {
+            background: rgba(241, 196, 15, 0.2);
+        }
+
+        .confidence-low {
+            background: rgba(231, 76, 60, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Climate Report</h1>
+            <a href="main.html" class="back-btn">
+                <img src="farm-logo.svg" alt="Farm Logo" width="24" height="24">
+                <img src="back.svg" alt="Back" width="20">
+                Back to Hub
+            </a>
+        </div>
+
+        <div id="weatherContent">
+            <div class="loading">
+                <img src="loading.webp" alt="Loading">
+                <p>Loading climate data...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const Api_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=AIzaSyBo3T4eKrSp6uFIUE8UPWHxwP0qA_6iZZg";
+        const Weather_Api_Key = "eb683ea6ae218de929885cb9350e4eee";
+        const RETRY_DELAY = 5000; // 5 seconds delay between retries
+        const MAX_RETRIES = 3;
+
+        // Rate limiting implementation
+        class RateLimiter {
+            constructor(maxRequests = 1, timeWindow = 1000) {
+                this.maxRequests = maxRequests;
+                this.timeWindow = timeWindow;
+                this.requests = [];
+            }
+
+            async waitForSlot() {
+                const now = Date.now();
+                this.requests = this.requests.filter(time => time > now - this.timeWindow);
+                
+                if (this.requests.length >= this.maxRequests) {
+                    const oldestRequest = this.requests[0];
+                    const waitTime = oldestRequest + this.timeWindow - now;
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                }
+                
+                this.requests.push(now);
+            }
+        }
+
+        const geminiRateLimiter = new RateLimiter(1, 1000); // 1 request per second
+
+        // Retry mechanism for API calls
+        async function retryWithBackoff(fn, retries = MAX_RETRIES) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    await geminiRateLimiter.waitForSlot();
+                    return await fn();
+                } catch (error) {
+                    if (error.message.includes('429') && i < retries - 1) {
+                        const delay = RETRY_DELAY * Math.pow(2, i);
+                        console.log(`Rate limited. Retrying in ${delay/1000} seconds...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+                    throw error;
+                }
+            }
+        }
+
+        // Fallback recommendations when API fails
+        function getFallbackRecommendations(crops, weatherData) {
+            return {
+                alerts: [{
+                    severity: "medium",
+                    message: "Using fallback recommendations due to API limitations. These are general guidelines."
+                }],
+                cropRecommendations: crops.map(crop => ({
+                    crop: crop,
+                    risks: [
+                        "Extreme temperature changes",
+                        "Unexpected rainfall",
+                        "Pest infestations"
+                    ],
+                    preventiveMeasures: [
+                        "Monitor crop health daily",
+                        "Ensure proper irrigation",
+                        "Maintain field hygiene"
+                    ],
+                    timing: "Implement measures immediately and monitor regularly"
+                })),
+                generalAdvice: [
+                    "Keep monitoring weather forecasts",
+                    "Maintain proper drainage systems",
+                    "Follow regular crop maintenance schedule",
+                    "Contact local agricultural extension for specific advice"
+                ]
+            };
+        }
+
+        // Fallback predictions when API fails
+        function getFallbackPrediction(location, weatherData) {
+            const currentTemp = weatherData.current.main.temp;
+            const currentWeather = weatherData.current.weather[0].main;
+            
+            return {
+                monthlyOverview: {
+                    temperatureTrend: `Expected to remain around ${currentTemp}°C with normal seasonal variations`,
+                    rainfallPrediction: "Following typical seasonal patterns",
+                    extremeWeatherRisk: "Medium - Stay alert to weather updates",
+                    confidenceLevel: "Medium"
+                },
+                weeklyBreakdown: [1, 2, 3, 4].map(week => ({
+                    week: week,
+                    prediction: `Similar conditions to current weather (${currentWeather})`,
+                    avgTemp: `${currentTemp}°C ± 3°C`,
+                    precipitation: "Normal for the season",
+                    farmingImpact: "Maintain regular farming operations with extra monitoring"
+                })),
+                longTermTrends: {
+                    pattern: "Following typical seasonal patterns",
+                    reliability: "Based on current conditions and historical patterns",
+                    farmingRecommendations: [
+                        "Maintain regular crop monitoring",
+                        "Follow standard seasonal practices",
+                        "Keep emergency measures ready",
+                        "Stay updated with local weather reports"
+                    ]
+                }
+            };
+        }
+
+        // Get farmer data from localStorage
+        function getFarmerData() {
+            const storedData = localStorage.getItem('farmerData');
+            console.log('Stored farmer data:', storedData);
+            
+            if (!storedData) {
+                console.log('No farmer data found');
+                return null;
+            }
+
+            try {
+                const { data, timestamp } = JSON.parse(storedData);
+                console.log('Parsed farmer data:', data);
+                return data;
+            } catch (error) {
+                console.error('Error parsing farmer data:', error);
+                return null;
+            }
+        }
+
+        // Get weather data for the next 15 days
+        async function getWeatherData(location) {
+            console.log('Fetching weather data for location:', location);
+            
+            try {
+                // Extract city name from full address
+                const cityMatch = location.match(/([^,]+)/);
+                const city = cityMatch ? cityMatch[1].trim() : location;
+                console.log('Extracted city:', city);
+
+                // Get current weather
+                console.log('Fetching current weather...');
+                const currentResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${Weather_Api_Key}&units=metric`);
+                if (!currentResponse.ok) {
+                    throw new Error(`Weather API error: ${currentResponse.status}`);
+                }
+                const currentData = await currentResponse.json();
+                console.log('Current weather data:', currentData);
+
+                // Get forecast data
+                console.log('Fetching forecast data...');
+                const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${Weather_Api_Key}&units=metric`);
+                if (!forecastResponse.ok) {
+                    throw new Error(`Forecast API error: ${forecastResponse.status}`);
+                }
+                const forecastData = await forecastResponse.json();
+                console.log('Forecast data:', forecastData);
+
+                return {
+                    current: currentData,
+                    forecast: forecastData
+                };
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                throw error;
+            }
+        }
+
+        // Update the generateRecommendations function
+        async function generateRecommendations(weatherData, crops) {
+            console.log('Generating recommendations for crops:', crops);
+            
+            const prompt = `As an agricultural expert, analyze the following weather data and provide crop-specific recommendations for the next 15 days:
+
+Current Weather:
+Temperature: ${weatherData.current.main.temp}°C
+Humidity: ${weatherData.current.main.humidity}%
+Wind Speed: ${weatherData.current.wind.speed} m/s
+Weather: ${weatherData.current.weather[0].main}
+
+Forecast Summary (Next 15 days):
+${weatherData.forecast.list.slice(0, 5).map(day => `
+- Temperature: ${day.main.temp}°C
+- Weather: ${day.weather[0].main}
+- Humidity: ${day.main.humidity}%
+`).join('')}
+
+Crops: ${crops.join(', ')}
+
+Provide recommendations in the following JSON format without any markdown formatting or code blocks:
+{
+    "alerts": [
+        {
+            "severity": "high/medium/low",
+            "message": "Alert message"
+        }
+    ],
+    "cropRecommendations": [
+        {
+            "crop": "Crop name",
+            "risks": ["Potential risks based on weather"],
+            "preventiveMeasures": ["Specific measures to take"],
+            "timing": "When to implement measures"
+        }
+    ],
+    "generalAdvice": [
+        "General recommendations for all crops"
+    ]
+}`;
+
+            try {
+                return await retryWithBackoff(async () => {
+                    console.log('Sending request to Gemini API...');
+                    const response = await fetch(Api_Url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: prompt
+                                }]
+                            }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Gemini API error:', errorText);
+                        throw new Error(`Gemini API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log('Gemini API response:', data);
+                    
+                    if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                        let responseText = data.candidates[0].content.parts[0].text;
+                        responseText = responseText.replace(/```json\s*|\s*```/g, '').trim();
+                        
+                        console.log('Cleaned response text:', responseText);
+                        
+                        try {
+                            const recommendations = JSON.parse(responseText);
+                            console.log('Parsed recommendations:', recommendations);
+                            return recommendations;
+                        } catch (parseError) {
+                            console.error('JSON parse error:', parseError);
+                            throw new Error('Failed to parse recommendations');
+                        }
+                    }
+                    throw new Error('Invalid API response format');
+                });
+            } catch (error) {
+                console.error('Error generating recommendations, using fallback:', error);
+                return getFallbackRecommendations(crops, weatherData);
+            }
+        }
+
+        // Update the generateMonthlyPrediction function similarly
+        async function generateMonthlyPrediction(weatherData, location) {
+            console.log('Generating monthly prediction for location:', location);
+            
+            const prompt = `As a climate and agricultural expert, analyze the following current weather data and historical patterns to predict weather trends for the next month. Consider seasonal patterns and recent climate data.
+
+Current Weather:
+Temperature: ${weatherData.current.main.temp}°C
+Humidity: ${weatherData.current.main.humidity}%
+Wind Speed: ${weatherData.current.wind.speed} m/s
+Weather: ${weatherData.current.weather[0].main}
+
+Recent Forecast:
+${weatherData.forecast.list.slice(0, 5).map(day => `
+- Temperature: ${day.main.temp}°C
+- Weather: ${day.weather[0].main}
+- Humidity: ${day.main.humidity}%
+`).join('')}
+
+Location: ${location}
+
+Provide a detailed monthly prediction in the following JSON format without any markdown formatting:
+{
+    "monthlyOverview": {
+        "temperatureTrend": "Description of expected temperature pattern",
+        "rainfallPrediction": "Expected rainfall pattern",
+        "extremeWeatherRisk": "Low/Medium/High with explanation",
+        "confidenceLevel": "Low/Medium/High"
+    },
+    "weeklyBreakdown": [
+        {
+            "week": 1,
+            "prediction": "Detailed prediction for week 1",
+            "avgTemp": "Expected average temperature",
+            "precipitation": "Expected precipitation",
+            "farmingImpact": "How this affects farming"
+        }
+    ],
+    "longTermTrends": {
+        "pattern": "Observable weather pattern",
+        "reliability": "Confidence in prediction",
+        "farmingRecommendations": [
+            "List of recommendations based on prediction"
+        ]
+    }
+}`;
+
+            try {
+                return await retryWithBackoff(async () => {
+                    console.log('Sending prediction request to Gemini API...');
+                    const response = await fetch(Api_Url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: prompt
+                                }]
+                            }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Gemini API error:', errorText);
+                        throw new Error(`Gemini API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log('Gemini API prediction response:', data);
+                    
+                    if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                        let predictionText = data.candidates[0].content.parts[0].text;
+                        predictionText = predictionText.replace(/```json\s*|\s*```/g, '').trim();
+                        
+                        console.log('Cleaned prediction text:', predictionText);
+                        
+                        const prediction = JSON.parse(predictionText);
+                        console.log('Parsed prediction:', prediction);
+                        return prediction;
+                    }
+                    throw new Error('Invalid API response format');
+                });
+            } catch (error) {
+                console.error('Error generating prediction, using fallback:', error);
+                return getFallbackPrediction(location, weatherData);
+            }
+        }
+
+        // Display weather, recommendations, and prediction
+        function displayWeatherAndRecommendations(weatherData, recommendations, prediction) {
+            console.log('Displaying weather, recommendations, and prediction');
+            const container = document.getElementById('weatherContent');
+            
+            // Create weather cards HTML
+            const weatherHtml = `
+                <div class="weather-grid">
+                    <div class="weather-card">
+                        <h3>🌡️ Current Weather</h3>
+                        <div class="weather-info">
+                            <div class="weather-item">
+                                <span class="weather-icon">🌡️</span>
+                                <span>Temperature: ${weatherData.current.main.temp}°C</span>
+                            </div>
+                            <div class="weather-item">
+                                <span class="weather-icon">💧</span>
+                                <span>Humidity: ${weatherData.current.main.humidity}%</span>
+                            </div>
+                            <div class="weather-item">
+                                <span class="weather-icon">💨</span>
+                                <span>Wind Speed: ${weatherData.current.wind.speed} m/s</span>
+                            </div>
+                            <div class="weather-item">
+                                <span class="weather-icon">☁️</span>
+                                <span>Weather: ${weatherData.current.weather[0].main}</span>
+                            </div>
+                        </div>
+                    </div>
+                    ${weatherData.forecast.list.slice(0, 5).map((day, index) => `
+                        <div class="weather-card">
+                            <h3>📅 Day ${index + 1}</h3>
+                            <div class="weather-info">
+                                <div class="weather-item">
+                                    <span class="weather-icon">🌡️</span>
+                                    <span>Temperature: ${day.main.temp}°C</span>
+                                </div>
+                                <div class="weather-item">
+                                    <span class="weather-icon">💧</span>
+                                    <span>Humidity: ${day.main.humidity}%</span>
+                                </div>
+                                <div class="weather-item">
+                                    <span class="weather-icon">☁️</span>
+                                    <span>Weather: ${day.weather[0].main}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Create recommendations HTML
+            const recommendationsHtml = `
+                <div class="recommendations">
+                    <h2>🌱 Crop Recommendations</h2>
+                    ${recommendations.alerts.map(alert => `
+                        <div class="alert">
+                            <strong>⚠️ ${alert.severity.toUpperCase()} Alert:</strong> ${alert.message}
+                        </div>
+                    `).join('')}
+                    
+                    ${recommendations.cropRecommendations.map(rec => `
+                        <div class="crop-advice">
+                            <h3>🌾 ${rec.crop}</h3>
+                            <div class="advice-content">
+                                <h4>Potential Risks:</h4>
+                                <ul class="advice-list">
+                                    ${rec.risks.map(risk => `<li>${risk}</li>`).join('')}
+                                </ul>
+                                <h4>Preventive Measures:</h4>
+                                <ul class="advice-list">
+                                    ${rec.preventiveMeasures.map(measure => `<li>${measure}</li>`).join('')}
+                                </ul>
+                                <p><strong>Timing:</strong> ${rec.timing}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+
+                    <div class="crop-advice">
+                        <h3>📝 General Advice</h3>
+                        <ul class="advice-list">
+                            ${recommendations.generalAdvice.map(advice => `<li>${advice}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            // Create prediction HTML
+            const predictionHtml = `
+                <div class="prediction-card">
+                    <h2>🔮 Monthly Climate Prediction</h2>
+                    
+                    <div class="prediction-grid">
+                        <div class="prediction-item">
+                            <h4>Temperature Trend</h4>
+                            <p>${prediction.monthlyOverview.temperatureTrend}</p>
+                            <span class="confidence-level confidence-${prediction.monthlyOverview.confidenceLevel.toLowerCase()}">
+                                ${prediction.monthlyOverview.confidenceLevel} Confidence
+                            </span>
+                        </div>
+                        
+                        <div class="prediction-item">
+                            <h4>Rainfall Prediction</h4>
+                            <p>${prediction.monthlyOverview.rainfallPrediction}</p>
+                        </div>
+                        
+                        <div class="prediction-item">
+                            <h4>Extreme Weather Risk</h4>
+                            <p>${prediction.monthlyOverview.extremeWeatherRisk}</p>
+                        </div>
+                    </div>
+
+                    <div class="prediction-grid">
+                        ${prediction.weeklyBreakdown.map(week => `
+                            <div class="prediction-item">
+                                <h4>Week ${week.week}</h4>
+                                <p>${week.prediction}</p>
+                                <p><strong>Avg Temp:</strong> ${week.avgTemp}</p>
+                                <p><strong>Precipitation:</strong> ${week.precipitation}</p>
+                                <p><strong>Impact:</strong> ${week.farmingImpact}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="prediction-item" style="margin-top: 1.5rem;">
+                        <h4>Long-term Trends</h4>
+                        <p><strong>Pattern:</strong> ${prediction.longTermTrends.pattern}</p>
+                        <p><strong>Reliability:</strong> ${prediction.longTermTrends.reliability}</p>
+                        <h4>Farming Recommendations:</h4>
+                        <ul class="advice-list">
+                            ${prediction.longTermTrends.farmingRecommendations.map(rec => `
+                                <li>${rec}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = weatherHtml + recommendationsHtml + predictionHtml;
+        }
+
+        // Initialize the page
+        async function initializePage() {
+            console.log('Initializing climate report page...');
+            
+            const farmerData = getFarmerData();
+            if (!farmerData) {
+                console.log('No farmer data found, showing registration prompt');
+                document.getElementById('weatherContent').innerHTML = `
+                    <div class="alert">
+                        Please complete the registration form first to get personalized climate recommendations.
+                        <br><br>
+                        <a href="register.html" class="back-btn">Go to Registration</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                console.log('Farmer data found:', farmerData);
+                
+                // Show loading state
+                document.getElementById('weatherContent').innerHTML = `
+                    <div class="loading">
+                        <img src="loading.webp" alt="Loading">
+                        <p>Loading climate data for ${farmerData.location}...</p>
+                    </div>
+                `;
+
+                const weatherData = await getWeatherData(farmerData.location);
+                if (!weatherData) throw new Error('Failed to fetch weather data');
+
+                const [recommendations, prediction] = await Promise.all([
+                    generateRecommendations(weatherData, farmerData.crops),
+                    generateMonthlyPrediction(weatherData, farmerData.location)
+                ]);
+
+                if (!recommendations || !prediction) {
+                    throw new Error('Failed to generate recommendations or prediction');
+                }
+
+                displayWeatherAndRecommendations(weatherData, recommendations, prediction);
+
+                // Store the last update time
+                localStorage.setItem('lastClimateUpdate', Date.now());
+            } catch (error) {
+                console.error('Error in initializePage:', error);
+                document.getElementById('weatherContent').innerHTML = `
+                    <div class="alert">
+                        ${error.message || 'Error loading climate data. Please try again later.'}
+                        <br><br>
+                        <button onclick="initializePage()" class="back-btn">Retry</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Check if we need to update the climate data (every 15 days)
+        function checkForUpdate() {
+            const lastUpdate = localStorage.getItem('lastClimateUpdate');
+            if (!lastUpdate || Date.now() - parseInt(lastUpdate) > 15 * 24 * 60 * 60 * 1000) {
+                initializePage();
+            }
+        }
+
+        // Initialize the page and set up periodic checks
+        window.addEventListener('load', () => {
+            console.log('Page loaded, initializing...');
+            initializePage();
+            setInterval(checkForUpdate, 24 * 60 * 60 * 1000); // Check daily
+        });
+    </script>
+</body>
+</html> 
